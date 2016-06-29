@@ -12,6 +12,6 @@ var musicianSchema = mongoose.Schema( {
   instruments: [String]
 })
 
-var Musician = mongoose.model('musician', musicianSchema)
+var MusicianDB = mongoose.model('musician', musicianSchema)
 
-module.exports = Musician
+module.exports = MusicianDB

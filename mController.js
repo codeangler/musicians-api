@@ -1,8 +1,8 @@
-var Musician = require('./musican_model')
+var MusicianDB = require('./musican_model')
 
-var musicanController = {
+var musicianController = {
   all: function (req, res) {
-    Musician.find({}, function(err, musician){
+    MusicianDB.find({}, function(err, musician){
       if (err){
         console.error("Musican Controller .all error ", err)
       } else {
@@ -12,7 +12,7 @@ var musicanController = {
   },
 
   create: function(req, res){
-    var newMusician = new Musician(req.body)
+    var newMusician = new MusicianDB(req.body)
 
     newMusician.save(function(error, musician){
       if (error){
@@ -24,7 +24,43 @@ var musicanController = {
     })
   },
 
+  single : function(req, res){
+    var id = req.params.id;
 
+    MusicianDB.findById(id, function(error, musician){
+      if (error){
+        console.error('get(musicianController.single) : ', error)
+      } else{
+        res.json(musician)
+      }
+    })
+  },
+
+  update : function(req, res){
+    var id = req.params.id;
+
+    MusicianDB.findByIdAndUpdate(id, req.body, {new :true}, function(err, updateMusician){
+      if(err){
+        console.error(err)
+      } else{
+        res.json(updateMusician)
+      }
+    })
+  },
+
+  destroy : function(req, res){
+    var id = req.params.id;
+    MusicianDB.findByIdAndRemove(id, function(err){
+      if(err){
+        console.error("destoy w/n controller", err)
+      } else{
+        res.json({
+          success: true,
+          message: "Remove item from db by id " + id,
+        })
+      }
+    })
+  },
 }
 
-module.exports = musicanController
+module.exports = musicianController
