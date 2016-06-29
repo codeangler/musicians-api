@@ -5,6 +5,7 @@ var musicianController = require('./mController')
 
 apiRouter.route ('/musicians')
   .get(musicianController.all)
+  .post(musicianController.create)
 
 // Export DIY middleware to server.js
 module.exports = apiRouter;
