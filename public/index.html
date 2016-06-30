@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<!-- DECLARE YOUR MAIN ANGULAR MODULE -->
+<html ng-app="musicianApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Musician API Submissions</title>
+  </head>
+  <!-- DEFINE YOUR CONTROLLER SCOPE USING CONTROLLER AS-->
+  <body ng-controller="homeCtrl as hCtrl">
+    <h1>Musician Database</h1>
+    <!-- CHECK FOR A WORKING CONTROLLER -->
+    {{ hCtrl.name }}
+    <ul>
+      <li ng-repeat=" musician in hCtrl.musicians">Name: {{musician.name}} <form ng-submit="hCtrl.deleteMusician(musician._id)"><button type="submit" >Delete</button></form></li>
+    </ul>
+    <!--  CREATE YOUR FORM TO SUBMIT DATA TO BACKEND ROUTES-->
+    <form ng-submit="hCtrl.submitMusician(hCtrl.newMusician)">
+      Name:<input type="text" name="name" ng-model="hCtrl.newMusician.name">
+      
+      <button type="submit">Submit Musician</button>
+    </form>
+<div>    <!-- MAIN ANGULAR SCRIPTS LOADED -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.5/angular.js"></script>
+    <!--  IMPORT ALL YOUR SEPERATE JS FILES BELOW -->
+    <script type="text/javascript" src="app.js"></script>
+    <script type="text/javascript" src="homeController.js"></script>
+    <script type="text/javascript" src="musicianFactory.js"></script></div>
+  </body>
+</html>
